@@ -1,2 +1,9 @@
 <p>listar-empleados works!</p>
-<app-empleados></app-empleados>
+<section *ngIf="empleados; else sinEmpleados">
+  <app-empleados [empleados]="empleados"></app-empleados>
+</section>
+
+<ng-template #sinEmpleados>
+  Cargando empleados...
+</ng-template>
+

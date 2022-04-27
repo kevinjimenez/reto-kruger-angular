@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {EmpleadoInterface} from '../../../utils';
 
 @Component({
   selector: 'app-empleado',
@@ -6,6 +7,5 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./empleado.component.scss'],
 })
 export class EmpleadoComponent {
-  //! TIPAR
-  @Input() empleado: any;
+  @Input() empleado!: EmpleadoInterface;
 }

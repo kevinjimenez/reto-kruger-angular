@@ -7,6 +7,9 @@ import {Observable} from 'rxjs';
 })
 export class PrincipalService<Interfaz> {
 
+  private baseUrl: string = `${this.url}:${this.port}/${this.segmento}`;
+  private baseUrlSinPort: string = `${this.url}/${this.segmento}`;
+
   constructor(
     protected readonly _httpClient: HttpClient,
     @Inject('url')
@@ -16,40 +19,32 @@ export class PrincipalService<Interfaz> {
     @Inject('port')
     private readonly port: number,
   ) {
+    this.baseUrl = this.port ? this.baseUrl : this.baseUrlSinPort;
+    console.log(this.baseUrl);
   }
 
-  findAll(consulta?: string): Observable<[Interfaz[], number]> {
-    let baseUrl = `${this.url}:${this.port}/${this.segmento}`;
-    if (consulta) {
-      baseUrl = `${baseUrl}?${consulta}`;
-    }
-    return this._httpClient.get(baseUrl) as Observable<[Interfaz[], number]>;
+  findAll(): Observable<Interfaz[]> {
+    return this._httpClient.get<Interfaz[]>(this.baseUrl);
   }
 
   updateById(id: number, payload: Interfaz): Observable<Interfaz> {
-    return this._httpClient.put(
-      `${this.url}:${this.port}/${this.segmento}/${id}`,
-      payload,
-    ) as Observable<Interfaz>;
+    return this._httpClient.put<Interfaz>(`${this.baseUrl}/${id}`, payload,
+    );
   }
 
   createOne(payload: Interfaz): Observable<Interfaz> {
-    return this._httpClient.post(
-      `${this.url}:${this.port}/${this.segmento}`,
-      payload,
-    ) as Observable<Interfaz>;
+    return this._httpClient.post<Interfaz>(`${this.baseUrl}`, payload,
+    );
   }
 
-  createMany(payload: Interfaz): Observable<Interfaz> {
-    return this._httpClient.post(
-      `${this.url}:${this.port}/${this.segmento}`,
-      payload,
-    ) as Observable<Interfaz>;
+  createMany(payload: Interfaz[]): Observable<Interfaz[]> {
+    return this._httpClient.post<Interfaz[]>(`${this.baseUrl}`, payload,
+    );
   }
 
   findOneById(id: number): Observable<Interfaz> {
-    return this._httpClient.get(
-      `${this.url}:${this.port}/${this.segmento}/${id}`,
-    ) as Observable<Interfaz>;
+    return this._httpClient.get<Interfaz>(
+      `${this.baseUrl}/${id}`,
+    );
   }
 }

@@ -4,8 +4,6 @@ import { CommonModule } from '@angular/common';
 import { CmsRoutingModule } from './cms-routing.module';
 import { ListarEmpleadosComponent } from './pages/listar-empleados/listar-empleados.component';
 import { CrearEmpleadoComponent } from './pages/crear-empleado/crear-empleado.component';
-import { EmpleadoComponent } from './components/empleado/empleado.component';
-import { EmpleadosComponent } from './components/empleados/empleados.component';
 import {SharedModule} from '../shared/shared.module';
 
 
@@ -13,8 +11,6 @@ import {SharedModule} from '../shared/shared.module';
   declarations: [
     ListarEmpleadosComponent,
     CrearEmpleadoComponent,
-    EmpleadoComponent,
-    EmpleadosComponent
   ],
   imports: [
     CommonModule,
