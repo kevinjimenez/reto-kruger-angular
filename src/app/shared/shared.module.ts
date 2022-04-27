@@ -39,6 +39,7 @@ import { EditarComponent } from './modals/editar/editar.component';
     VacunasComponent,
     EmpleadoDetalleComponent,
     EmpleadoFormularioComponent,
+    EmpleadoComponent,
   ],
 })
 export class SharedModule {

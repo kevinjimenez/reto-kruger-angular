@@ -16,6 +16,6 @@ export class EmpleadoComponent {
   }
 
   irADetalle(id: number) {
-    this._router.navigate(['/cms', 'empleado', id]);
+    this._router.navigate(['/website', 'empleado', id]);
   }
 }

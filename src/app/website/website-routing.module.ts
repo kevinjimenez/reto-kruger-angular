@@ -1,7 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {HomeComponent} from './pages/home/home.component';
 import {LayoutComponent} from './components/layout/layout.component';
+import {EmpleadoDetalleComponent} from '../shared/components/empleado-detalle/empleado-detalle.component';
+import {HomeComponent} from './pages/home/home.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
       {
         path: 'home',
         component: HomeComponent,
+      },
+      {
+        path: 'empleado/:id',
+        component: EmpleadoDetalleComponent,
       },
       {
         path: '',

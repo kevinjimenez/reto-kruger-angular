@@ -1,9 +1,28 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../../environments/environment';
+import {Observable} from 'rxjs';
+import {AuthInterface, LoginInterface} from '../../../utils';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
 
-  constructor() { }
+  private url: string = environment.url;
+  private port: number = environment.port;
+  private segmento: string = 'auth';
+  private baseUrl: string = `${this.url}:${this.port}/${this.segmento}/login`;
+  private baseUrlSinPort: string = `${this.url}/${this.segmento}/login`;
+
+  constructor(
+    private readonly _httpClient: HttpClient,
+  ) {
+    this.baseUrl = this.port ? this.baseUrl : this.baseUrlSinPort;
+  }
+
+  login(payload: LoginInterface): Observable<AuthInterface> {
+    return this._httpClient.post<AuthInterface>(`${this.baseUrl}`, payload,
+    );
+  }
 }
