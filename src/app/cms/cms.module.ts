@@ -7,12 +7,14 @@ import {CrearEmpleadoComponent} from './pages/crear-empleado/crear-empleado.comp
 import {SharedModule} from '../shared/shared.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from '../material/material.module';
+import { LayoutComponent } from './components/layout/layout.component';
 
 
 @NgModule({
   declarations: [
     ListarEmpleadosComponent,
     CrearEmpleadoComponent,
+    LayoutComponent,
   ],
   imports: [
     CommonModule,

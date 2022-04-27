@@ -7,6 +7,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({
@@ -18,6 +21,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatButtonModule,
     MatExpansionModule,
     MatDialogModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
   ],
   exports: [
     MatCardModule,
@@ -27,6 +33,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatButtonModule,
     MatExpansionModule,
     MatDialogModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
   ],
 })
 export class MaterialModule {

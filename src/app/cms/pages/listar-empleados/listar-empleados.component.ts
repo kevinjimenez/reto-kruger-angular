@@ -15,6 +15,7 @@ export class ListarEmpleadosComponent implements OnInit {
   constructor(
     private readonly _empleadoService: EmpleadoService,
   ) {
+    console.log('ass');
   }
 
   ngOnInit(): void {

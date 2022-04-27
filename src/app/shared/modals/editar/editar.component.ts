@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {CreateEmpleadoInterface, EmpleadoInterface, UpdateEmpleadoInterface} from '../../../utils';
+import {EmpleadoInterface, UpdateEmpleadoInterface} from '../../../utils';
 import {DireccionService, EmpleadoService, VacunaService} from '../../../core';
 import {mergeMap} from 'rxjs';
 
