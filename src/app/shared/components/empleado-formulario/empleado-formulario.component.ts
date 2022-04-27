@@ -114,10 +114,8 @@ export class EmpleadoFormularioComponent implements OnInit {
   guardarEmpleado(_: HTMLFormElement) {
     if (this.empleadoFormulario.valid) {
       console.log(this.empleadoFormulario.value);
-      const payload = this.limpiarValoresNullsJson<CreateEmpleadoInterface>(this.empleadoFormulario.value) as CreateEmpleadoInterface;
-      console.log(payload);
-      // payload.login = 18;
-      // this.emitEmpleado.emit(payload as CreateEmpleadoInterface);
+      // const payload = this.limpiarValoresNullsJson<CreateEmpleadoInterface>(this.empleadoFormulario.value) as CreateEmpleadoInterface;
+      this.emitEmpleado.emit(this.empleadoFormulario.value);
     } else {
       this.empleadoFormulario.markAllAsTouched();
     }

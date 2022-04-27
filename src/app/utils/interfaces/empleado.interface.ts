@@ -25,9 +25,7 @@ export interface CreateEmpleadoInterface extends Omit<EmpleadoInterface,
   'fechaActualizacion' |
   'fechaNacimiento' |
   'telefonoMovil' |
-  'vacunado' |
-  'direcciones' |
-  'vacunas'> {
+  'vacunado'> {
 }
 
 export interface UpdateEmpleadoInterface extends Omit<EmpleadoInterface,
