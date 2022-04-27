@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {DireccionInterface} from '../../../utils';
 
 @Component({
   selector: 'app-direcciones',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./direcciones.component.scss']
 })
 export class DireccionesComponent implements OnInit {
+
+  @Input() direcciones!: DireccionInterface[]
 
   constructor() { }
 

@@ -1,10 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { CmsRoutingModule } from './cms-routing.module';
-import { ListarEmpleadosComponent } from './pages/listar-empleados/listar-empleados.component';
-import { CrearEmpleadoComponent } from './pages/crear-empleado/crear-empleado.component';
+import {CmsRoutingModule} from './cms-routing.module';
+import {ListarEmpleadosComponent} from './pages/listar-empleados/listar-empleados.component';
+import {CrearEmpleadoComponent} from './pages/crear-empleado/crear-empleado.component';
 import {SharedModule} from '../shared/shared.module';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MaterialModule} from '../material/material.module';
 
 
 @NgModule({
@@ -15,7 +17,10 @@ import {SharedModule} from '../shared/shared.module';
   imports: [
     CommonModule,
     CmsRoutingModule,
-    SharedModule
-  ]
+    SharedModule,
+    // ReactiveFormsModule,
+    MaterialModule,
+  ],
 })
-export class CmsModule { }
+export class CmsModule {
+}

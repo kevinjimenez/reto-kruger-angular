@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EmpleadoInterface} from '../../../utils';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-empleado',
@@ -8,4 +9,13 @@ import {EmpleadoInterface} from '../../../utils';
 })
 export class EmpleadoComponent {
   @Input() empleado!: EmpleadoInterface;
+
+  constructor(
+    private readonly _router: Router,
+  ) {
+  }
+
+  irADetalle(id: number) {
+    this._router.navigate(['/cms', 'empleado', id]);
+  }
 }

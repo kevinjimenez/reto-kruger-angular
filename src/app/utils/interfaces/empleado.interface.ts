@@ -16,6 +16,7 @@ export interface EmpleadoInterface {
   rol: TipoUsuarioEnum.Usuario | TipoUsuarioEnum.Admin;
   direcciones?: DireccionInterface[];
   vacunas?: VacunaInterface[];
+  login?: number
 }
 
 export interface CreateEmpleadoInterface extends Omit<EmpleadoInterface,

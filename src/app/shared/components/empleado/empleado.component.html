@@ -1,22 +1,25 @@
-<h2>
-  {{empleado.nombres}} {{empleado.apellidos}}
-</h2>
-<p>
-  {{empleado.cedula}}
-</p>
-
-<p>
-  {{empleado.correoElectronico}}
-</p>
-
-<p>
-  {{empleado?.fechaNacimiento ?? 'Sin registrar'}}
-</p>
-
-<p>
-  {{empleado?.vacunado ?? 'Sin registrar'}}
-</p>
-
-<p>
-  {{empleado?.telefonoMovil ?? 'Sin registrar'}}
-</p>
+<mat-card class="contenedor-card">
+  <mat-card-header>
+    <div mat-card-avatar class="avatar-card"></div>
+    <mat-card-title>
+      {{empleado.nombres}} {{empleado.apellidos}}
+    </mat-card-title>
+  </mat-card-header>
+<!--  <img mat-card-image-->
+<!--       src="assets/online_cv.svg"-->
+<!--       class="img-fluid"-->
+<!--       alt="img card">-->
+  <mat-card-content>
+    <section class="contenido-card">
+      <p>
+        <strong>Correo:</strong> {{empleado.correoElectronico}}
+      </p>
+      <p>
+        <strong>C.C:</strong> {{empleado.cedula}}
+      </p>
+    </section>
+    <div class="d-grid gap-2">
+      <button class="btn btn-outline-success" (click)="irADetalle(empleado.id)" type="button">Ver mas</button>
+    </div>
+  </mat-card-content>
+</mat-card>

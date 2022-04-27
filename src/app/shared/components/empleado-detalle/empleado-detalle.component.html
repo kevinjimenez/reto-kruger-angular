@@ -1,0 +1,77 @@
+<section *ngIf="empleado">
+  <mat-card class="contenedor-card">
+    <mat-card-header>
+      <div mat-card-avatar class="avatar-card"></div>
+      <mat-card-title>
+        {{empleado.nombres}} {{empleado.apellidos}}
+      </mat-card-title>
+      <mat-card-subtitle>
+        <p>
+          <strong>C.C:</strong> {{empleado.cedula}}
+        </p>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <img src="assets/online_cv.svg"
+         class="img-fluid"
+         width="50%"
+         alt="img card">
+    <mat-card-content>
+          <section class="text-center">
+            <h5>Informacion adicional</h5>
+            <section>
+              <p>
+                <strong>Fecha nacimiento:</strong> {{empleado?.fechaNacimiento ?? 'Sin registrar'}}
+              </p>
+
+              <p>
+                <strong>Esta vacunado:</strong> {{empleado?.vacunado ?? 'Sin registrar'}}
+              </p>
+
+              <p>
+                <strong>Telefono movil:</strong> {{empleado?.telefonoMovil ?? 'Sin registrar'}}
+              </p>
+            </section>
+          </section>
+          <!--    DIRECCCION-->
+          <section>
+
+            <h5>Dirección</h5>
+              <section *ngIf="empleado.direcciones; else sinDirecciones">
+                <app-direcciones [direcciones]="empleado.direcciones"></app-direcciones>
+              </section>
+            <ng-template #sinDirecciones>
+              No se registro direcciones!
+            </ng-template>
+          </section>
+
+          <!--    VACUNAS-->
+          <section>
+            <h5>Vacunas</h5>
+              <section *ngIf="empleado.vacunas; else sinVacunas">
+                <app-vacunas [vacunas]="empleado.vacunas"></app-vacunas>
+              </section>
+            <ng-template #sinVacunas>
+              No se registro vacunas!
+            </ng-template>
+          </section>
+    </mat-card-content>
+  </mat-card>
+  <div class="row contenedor-btn">
+    <div class="col-sm-6">
+      <div class="d-grid gap-2">
+        <button class="btn btn-outline-warning" type="button">Editar</button>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="d-grid gap-2">
+        <button class="btn btn-outline-danger" (click)="eliminarEmpleado(empleado.id)" type="button">Eliminar</button>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="d-grid gap-2">
+        <button class="btn btn-outline-danger" (click)="darDeAlta(empleado.id)" type="button">Dar de alta</button>
+      </div>
+    </div>
+  </div>
+
+</section>

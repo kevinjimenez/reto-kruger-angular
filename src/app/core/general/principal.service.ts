@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class PrincipalService<Interfaz> {
+export class PrincipalService<Interfaz, CreateInterface, UpdateInterface> {
 
   private baseUrl: string = `${this.url}:${this.port}/${this.segmento}`;
   private baseUrlSinPort: string = `${this.url}/${this.segmento}`;
@@ -27,12 +27,12 @@ export class PrincipalService<Interfaz> {
     return this._httpClient.get<Interfaz[]>(this.baseUrl);
   }
 
-  updateById(id: number, payload: Interfaz): Observable<Interfaz> {
+  updateById(id: number, payload: UpdateInterface): Observable<Interfaz> {
     return this._httpClient.put<Interfaz>(`${this.baseUrl}/${id}`, payload,
     );
   }
 
-  createOne(payload: Interfaz): Observable<Interfaz> {
+  createOne(payload: CreateInterface): Observable<Interfaz> {
     return this._httpClient.post<Interfaz>(`${this.baseUrl}`, payload,
     );
   }
@@ -44,6 +44,12 @@ export class PrincipalService<Interfaz> {
 
   findOneById(id: number): Observable<Interfaz> {
     return this._httpClient.get<Interfaz>(
+      `${this.baseUrl}/${id}`,
+    );
+  }
+
+  deleteById(id: number) {
+    return this._httpClient.delete<Interfaz>(
       `${this.baseUrl}/${id}`,
     );
   }

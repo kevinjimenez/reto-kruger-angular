@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {VacunaInterface} from '../../../utils';
 
 @Component({
   selector: 'app-vacunas',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./vacunas.component.scss']
 })
 export class VacunasComponent implements OnInit {
+
+  @Input() vacunas!: VacunaInterface[];
 
   constructor() { }
 
