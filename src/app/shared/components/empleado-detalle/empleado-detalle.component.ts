@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {EmpleadoService} from '../../../core';
 import {EmpleadoInterface} from '../../../utils';
+import {MatDialog} from '@angular/material/dialog';
+import {EditarComponent} from '../../modals/editar/editar.component';
 
 @Component({
   selector: 'app-empleado-detalle',
@@ -17,6 +19,7 @@ export class EmpleadoDetalleComponent implements OnInit {
     private readonly _router: Router,
     private readonly _activatedRoute: ActivatedRoute,
     private readonly _empleadoService: EmpleadoService,
+    public dialog: MatDialog
   ) {
   }
 
@@ -42,5 +45,11 @@ export class EmpleadoDetalleComponent implements OnInit {
 
   darDeAlta(id: number) {
     console.log('crear login');
+  }
+
+  editarEmpleado(empleado: EmpleadoInterface) {
+    this.dialog.open(EditarComponent, {
+      data: empleado,
+    });
   }
 }

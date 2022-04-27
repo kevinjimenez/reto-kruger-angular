@@ -1,6 +1,6 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {CreateEmpleadoInterface} from '../../../utils';
+import {CreateEmpleadoInterface, EmpleadoInterface} from '../../../utils';
 import {MatAccordion} from '@angular/material/expansion';
 
 @Component({
@@ -11,28 +11,47 @@ import {MatAccordion} from '@angular/material/expansion';
 export class EmpleadoFormularioComponent implements OnInit {
 
   empleadoFormulario: FormGroup = new FormGroup({});
-  @Output() emitEmpleado: EventEmitter<CreateEmpleadoInterface> = new EventEmitter();
+  @Output() emitEmpleado: EventEmitter<EmpleadoInterface> = new EventEmitter();
+  @Input() empleadoAEditar?: EmpleadoInterface;
 
   constructor(
     private readonly _formBuilder: FormBuilder,
   ) {
-    this.contruirFormulario();
+
   }
 
   ngOnInit(): void {
+    this.contruirFormulario();
   }
 
   private contruirFormulario() {
     this.empleadoFormulario = this._formBuilder.group({
-      nombres: ['', [Validators.required]],
-      apellidos: ['', [Validators.required]],
-      cedula: ['', [Validators.required]],
-      correoElectronico: ['', [Validators.required]],
-      fechaNacimiento: [''],
-      telefonoMovil: [''],
-      vacunado: [false],
-      direcciones: new FormArray([]),
-      vacunas: new FormArray([]),
+      nombres: [this.empleadoAEditar?.nombres ?? '', [Validators.required]],
+      apellidos: [this.empleadoAEditar?.apellidos ?? '', [Validators.required]],
+      cedula: [this.empleadoAEditar?.cedula ?? '', [Validators.required]],
+      correoElectronico: [this.empleadoAEditar?.correoElectronico ?? '', [Validators.required]],
+      fechaNacimiento: [this.empleadoAEditar?.fechaNacimiento ?? ''],
+      telefonoMovil: [this.empleadoAEditar?.telefonoMovil ?? ''],
+      vacunado: [this.empleadoAEditar?.vacunado ?? ''],
+      // DIRECCIONES
+      direcciones: new FormArray(this.empleadoAEditar
+        ?.direcciones
+        ?.map(i => (new FormGroup({
+          provincia: new FormControl(i.provincia, Validators.required),
+          ciudad: new FormControl(i.ciudad, Validators.required),
+          callePrincipal: new FormControl(i.callePrincipal, Validators.required),
+          calleSecundaria: new FormControl(i.calleSecundaria),
+          id: new FormControl(i.id),
+        }))) ?? []),
+      // DIRECCIONES
+      vacunas: new FormArray(this.empleadoAEditar
+        ?.vacunas
+        ?.map(i => (new FormGroup({
+          tipoVacuna: new FormControl(i.tipoVacuna, Validators.required),
+          fechaVacunacion: new FormControl(i.fechaVacunacion, Validators.required),
+          numeroDosis: new FormControl(i.numeroDosis, Validators.required),
+          id: new FormControl(i.id),
+        }))) ?? []),
     });
   }
 
@@ -114,26 +133,9 @@ export class EmpleadoFormularioComponent implements OnInit {
   guardarEmpleado(_: HTMLFormElement) {
     if (this.empleadoFormulario.valid) {
       console.log(this.empleadoFormulario.value);
-      // const payload = this.limpiarValoresNullsJson<CreateEmpleadoInterface>(this.empleadoFormulario.value) as CreateEmpleadoInterface;
-      this.emitEmpleado.emit(this.empleadoFormulario.value);
+      this.emitEmpleado.emit({...this.empleadoAEditar, ...this.empleadoFormulario.value});
     } else {
       this.empleadoFormulario.markAllAsTouched();
     }
   }
-
-  limpiarValoresNullsJson<T>(json: T | {}) {
-    let jsonN = {};
-    for (const key of Object.keys(json)) {
-      // @ts-ignore
-      if (json[key]) {
-        jsonN = {
-          // @ts-ignore
-          [key]: json[key],
-          ...jsonN,
-        };
-      }
-    }
-    return jsonN;
-  }
-
 }

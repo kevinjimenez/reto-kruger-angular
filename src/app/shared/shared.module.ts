@@ -11,6 +11,7 @@ import {MaterialModule} from '../material/material.module';
 import {EmpleadoDetalleComponent} from './components/empleado-detalle/empleado-detalle.component';
 import {EmpleadoFormularioComponent} from './components/empleado-formulario/empleado-formulario.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { EditarComponent } from './modals/editar/editar.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     VacunasComponent,
     EmpleadoDetalleComponent,
     EmpleadoFormularioComponent,
+    EditarComponent,
   ],
   imports: [
     CommonModule,

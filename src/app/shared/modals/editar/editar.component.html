@@ -1,0 +1,7 @@
+<mat-dialog-content class="mat-typography">
+  <section *ngIf="data">
+    <app-empleado-formulario [empleadoAEditar]="data" (emitEmpleado)="editarEmpeado($event)">
+
+    </app-empleado-formulario>
+  </section>
+</mat-dialog-content>

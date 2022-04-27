@@ -32,6 +32,11 @@ export class PrincipalService<Interfaz, CreateInterface, UpdateInterface> {
     );
   }
 
+  updateAll(payload: UpdateInterface[]): Observable<Interfaz[]> {
+    return this._httpClient.put<Interfaz[]>(this.baseUrl, payload,
+    );
+  }
+
   createOne(payload: CreateInterface): Observable<Interfaz> {
     return this._httpClient.post<Interfaz>(`${this.baseUrl}`, payload,
     );

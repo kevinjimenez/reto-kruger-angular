@@ -30,7 +30,5 @@ export interface CreateEmpleadoInterface extends Omit<EmpleadoInterface,
 
 export interface UpdateEmpleadoInterface extends Omit<EmpleadoInterface,
   'fechaCreacion' |
-  'fechaActualizacion' |
-  'direcciones' |
-  'vacunas'> {
+  'fechaActualizacion'> {
 }
