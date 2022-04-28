@@ -4,18 +4,29 @@
     <mat-card-title>
       {{empleado.nombres}} {{empleado.apellidos}}
     </mat-card-title>
-  </mat-card-header>
-<!--  <img mat-card-image-->
-<!--       src="assets/online_cv.svg"-->
-<!--       class="img-fluid"-->
-<!--       alt="img card">-->
-  <mat-card-content>
-    <section class="contenido-card">
+    <mat-card-subtitle>
+      <p>
+        <strong>Rol:</strong> {{empleado.rol}}
+      </p>
       <p>
         <strong>Correo:</strong> {{empleado.correoElectronico}}
       </p>
       <p>
         <strong>C.C:</strong> {{empleado.cedula}}
+      </p>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <section class="contenido-card">
+      <div class="text-center">
+        <app-img [img]="'assets/online_cv.svg'">
+        </app-img>
+      </div>
+      <p>
+        <strong>Fecha nacimiento:</strong> {{empleado.fechaNacimiento || 'Sin registro'}}
+      </p>
+      <p>
+        <strong>Telefono movil:</strong> {{empleado.telefonoMovil || 'Sin registro'}}
       </p>
     </section>
     <div class="d-grid gap-2">

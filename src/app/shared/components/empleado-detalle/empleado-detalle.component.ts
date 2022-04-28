@@ -1,9 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {EmpleadoService} from '../../../core';
 import {EmpleadoInterface} from '../../../utils';
 import {MatDialog} from '@angular/material/dialog';
 import {EditarComponent} from '../../modals/editar/editar.component';
+import {
+  CrearUsuarioContraseniaComponent
+} from '../../modals/crear-usuario-contrasenia/crear-usuario-contrasenia.component';
 
 @Component({
   selector: 'app-empleado-detalle',
@@ -14,6 +17,7 @@ export class EmpleadoDetalleComponent implements OnInit {
 
   idEmpleado!: number;
   empleado!: EmpleadoInterface;
+  usuarioLogeado!: EmpleadoInterface;
 
   constructor(
     private readonly _router: Router,
@@ -24,6 +28,8 @@ export class EmpleadoDetalleComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.usuarioLogeado = JSON.parse(localStorage.getItem('payload')!) as EmpleadoInterface
+
     this._activatedRoute
       .params
       .subscribe((params: Params) => this.idEmpleado = +params['id']);
@@ -43,13 +49,19 @@ export class EmpleadoDetalleComponent implements OnInit {
     );
   }
 
-  darDeAlta(id: number) {
-    console.log('crear login');
+  darDeAlta(empleado: EmpleadoInterface) {
+    const dialogRef = this.dialog.open(CrearUsuarioContraseniaComponent, {
+      data: empleado,
+    });
   }
 
   editarEmpleado(empleado: EmpleadoInterface) {
-    this.dialog.open(EditarComponent, {
+    const dialogRef = this.dialog.open(EditarComponent, {
       data: empleado,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.empleado = result;
     });
   }
 }

@@ -16,6 +16,9 @@ export class EmpleadoComponent {
   }
 
   irADetalle(id: number) {
-    this._router.navigate(['/website', 'empleado', id]);
+    const usuario = JSON.parse(localStorage.getItem('payload')!) as EmpleadoInterface;
+    const {rol} = usuario;
+    const path = rol === 'admin' ? '/cms/empleado' : '/website/empleado';
+    this._router.navigate([path, id]);
   }
 }

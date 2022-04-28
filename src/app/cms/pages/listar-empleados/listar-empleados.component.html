@@ -1,5 +1,17 @@
 <section *ngIf="empleados; else sinEmpleados">
-  <app-empleados [empleados]="empleados"></app-empleados>
+
+  <section style="padding: 0.5rem 1rem 0.5rem 1rem">
+    <app-barra-busqueda (emitEmpleados)="empleadosFiltro($event)">
+    </app-barra-busqueda>
+  </section>
+
+  <app-empleados *ngIf="empleados.length>0; else vacioEmpleados" [empleados]="empleados"></app-empleados>
+
+  <ng-template #vacioEmpleados>
+    <h4 class="text-center">
+      Sin registros
+    </h4>
+  </ng-template>
 </section>
 
 <ng-template #sinEmpleados>

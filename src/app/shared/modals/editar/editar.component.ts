@@ -1,8 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {EmpleadoInterface, UpdateEmpleadoInterface} from '../../../utils';
 import {DireccionService, EmpleadoService, VacunaService} from '../../../core';
 import {mergeMap} from 'rxjs';
+import {EmpleadoFormularioComponent} from '../../components/empleado-formulario/empleado-formulario.component';
 
 @Component({
   selector: 'app-editar',
@@ -14,6 +15,7 @@ export class EditarComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: EmpleadoInterface,
+    public dialogRef: MatDialogRef<EmpleadoFormularioComponent>,
     private readonly _empleadoService: EmpleadoService,
     private readonly _direccionService: DireccionService,
     private readonly _vacunaService: VacunaService,
@@ -21,7 +23,7 @@ export class EditarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data);
+
   }
 
   editarEmpeado(empleado: UpdateEmpleadoInterface) {
@@ -53,9 +55,10 @@ export class EditarComponent implements OnInit {
         {
           next: values => {
             vacunas = values!;
+            empleado.direcciones = direcciones;
+            empleado.vacunas = vacunas;
             console.log(empleado);
-            console.log(direcciones);
-            console.log(vacunas);
+            this.dialogRef.close(empleado);
           },
           error: console.log,
         },

@@ -1,3 +1,10 @@
-<section *ngFor="let vacuna of vacunas">
-  <app-vacuna [vacuna]="vacuna"></app-vacuna>
-</section>
+<div class="row" *ngIf="vacunas.length > 0; else sinVacunas">
+  <section class="col-sm-4" *ngFor="let vacuna of vacunas">
+    <app-vacuna [vacuna]="vacuna">
+    </app-vacuna>
+  </section>
+</div>
+
+<ng-template #sinVacunas>
+  No se encuentra vacunas registrados.
+</ng-template>

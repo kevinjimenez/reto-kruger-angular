@@ -8,6 +8,7 @@ import {SharedModule} from '../shared/shared.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from '../material/material.module';
 import { LayoutComponent } from './components/layout/layout.component';
+import { BarraBusquedaComponent } from './components/barra-busqueda/barra-busqueda.component';
 
 
 @NgModule({
@@ -15,12 +16,13 @@ import { LayoutComponent } from './components/layout/layout.component';
     ListarEmpleadosComponent,
     CrearEmpleadoComponent,
     LayoutComponent,
+    BarraBusquedaComponent,
   ],
   imports: [
     CommonModule,
     CmsRoutingModule,
     SharedModule,
-    // ReactiveFormsModule,
+    ReactiveFormsModule,
     MaterialModule,
   ],
 })

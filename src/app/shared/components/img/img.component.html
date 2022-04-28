@@ -1,1 +1,12 @@
-<p>img works!</p>
+<img (error)="imgError()"
+     (load)="imgLoaded()"
+     [src]="img"
+     alt=""
+     width="250px"
+     style="margin: 1rem 1rem 1rem 1rem"
+     *ngIf="img; else elseImg">
+<ng-template #elseImg>
+  <img width="228"
+       [src]="imgDefault"
+       alt="">
+</ng-template>

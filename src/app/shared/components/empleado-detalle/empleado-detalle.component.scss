@@ -1,5 +1,6 @@
 p {
   margin: 0;
+  font-size: 1rem;
 }
 
 .contenedor-card {
@@ -16,6 +17,11 @@ p {
 }
 
 .contenido-card {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.contenido-direcciones-vacunas {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }

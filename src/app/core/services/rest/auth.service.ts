@@ -12,8 +12,8 @@ export class AuthService {
   private url: string = environment.url;
   private port: number = environment.port;
   private segmento: string = 'auth';
-  private baseUrl: string = `${this.url}:${this.port}/${this.segmento}/login`;
-  private baseUrlSinPort: string = `${this.url}/${this.segmento}/login`;
+  private baseUrl: string = `${this.url}:${this.port}/${this.segmento}`;
+  private baseUrlSinPort: string = `${this.url}/${this.segmento}`;
 
   constructor(
     private readonly _httpClient: HttpClient,
@@ -22,7 +22,12 @@ export class AuthService {
   }
 
   login(payload: LoginInterface): Observable<AuthInterface> {
-    return this._httpClient.post<AuthInterface>(`${this.baseUrl}`, payload,
+    return this._httpClient.post<AuthInterface>(`${this.baseUrl}/login`, payload,
+    );
+  }
+
+  signin(payload: LoginInterface): Observable<LoginInterface> {
+    return this._httpClient.post<LoginInterface>(`${this.baseUrl}/signin`, payload,
     );
   }
 }

@@ -1,0 +1,46 @@
+<form [formGroup]="form" (ngSubmit)="register($event)" style="padding: 1rem 1rem 1rem 1rem">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title> {{esCrear ? 'Credenciales' : 'Ingresar credenciales'}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row" style="padding: 1rem 0 1rem 0">
+        <div class="col-xs">
+          <mat-form-field>
+            <mat-label>Usuario</mat-label>
+            <input placeholder="Usuario" autocomplete="off" formControlName="usuario" matInput type="text">
+          </mat-form-field>
+          <div *ngIf="form?.get('usuario')?.touched && form?.get('usuario')?.invalid">
+            <mat-error *ngIf="form?.get('usuario')?.hasError('required')">
+              EL campo Usuario es requerido
+            </mat-error>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="padding: 1rem 0 1rem 0">
+        <div class="col-xs">
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input placeholder="password" autocomplete="off" formControlName="password" matInput type="password">
+          </mat-form-field>
+          <div *ngIf="form?.get('password')?.touched && form?.get('password')?.invalid">
+            <mat-error *ngIf="form?.get('password')?.hasError('required')">
+              El campo Password es requerido
+            </mat-error>
+            <mat-error *ngIf="form?.get('password')?.hasError('minlength')">
+              Debe tener al menos 8 caracteres
+            </mat-error>
+            <mat-error *ngIf="form?.get('password')?.hasError('maxlength')">
+              Debe tener maximo 16 caracteres
+            </mat-error>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button class="btn btn-success" [disabled]="form?.invalid" type="submit">
+        {{esCrear ? 'Registro' : 'Ingresar'}}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

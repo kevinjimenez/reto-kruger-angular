@@ -22,4 +22,8 @@ export class ListarEmpleadosComponent implements OnInit {
     this._empleadoService.findAll().subscribe(empleados => this.empleados = empleados);
   }
 
+  empleadosFiltro(empleados: EmpleadoInterface[]) {
+    console.log('ab', empleados);
+    this.empleados = empleados;
+  }
 }

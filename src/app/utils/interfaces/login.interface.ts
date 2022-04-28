@@ -7,6 +7,7 @@ export interface AuthInterface {
 
 
 export interface LoginInterface {
+  id?: number;
   usuario: string;
   password: string;
 }

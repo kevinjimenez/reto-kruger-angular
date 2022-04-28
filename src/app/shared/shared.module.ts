@@ -12,6 +12,8 @@ import {EmpleadoDetalleComponent} from './components/empleado-detalle/empleado-d
 import {EmpleadoFormularioComponent} from './components/empleado-formulario/empleado-formulario.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { EditarComponent } from './modals/editar/editar.component';
+import { CrearUsuarioContraseniaComponent } from './modals/crear-usuario-contrasenia/crear-usuario-contrasenia.component';
+import { CredencialesFormularioComponent } from './components/credenciales-formulario/credenciales-formulario.component';
 
 
 @NgModule({
@@ -26,6 +28,8 @@ import { EditarComponent } from './modals/editar/editar.component';
     EmpleadoDetalleComponent,
     EmpleadoFormularioComponent,
     EditarComponent,
+    CrearUsuarioContraseniaComponent,
+    CredencialesFormularioComponent,
   ],
   imports: [
     CommonModule,
@@ -40,6 +44,7 @@ import { EditarComponent } from './modals/editar/editar.component';
     EmpleadoDetalleComponent,
     EmpleadoFormularioComponent,
     EmpleadoComponent,
+    CredencialesFormularioComponent,
   ],
 })
 export class SharedModule {

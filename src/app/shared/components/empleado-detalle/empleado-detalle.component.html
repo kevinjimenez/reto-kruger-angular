@@ -7,71 +7,81 @@
       </mat-card-title>
       <mat-card-subtitle>
         <p>
+          <strong>Rol:</strong> {{empleado.rol}}
+        </p>
+        <p>
+          <strong>Correo:</strong> {{empleado.correoElectronico}}
+        </p>
+        <p>
           <strong>C.C:</strong> {{empleado.cedula}}
         </p>
       </mat-card-subtitle>
     </mat-card-header>
-    <img src="assets/online_cv.svg"
-         class="img-fluid"
-         width="50%"
-         alt="img card">
+    <!--    <img src="assets/online_cv.svg"-->
+    <!--         class="img-fluid"-->
+    <!--         width="50%"-->
+    <!--         alt="img card">-->
     <mat-card-content>
-          <section class="text-center">
-            <h5>Informacion adicional</h5>
-            <section>
-              <p>
-                <strong>Fecha nacimiento:</strong> {{empleado?.fechaNacimiento ?? 'Sin registrar'}}
-              </p>
+      <section class="text-center">
+        <h5>Informacion adicional</h5>
+        <section>
+          <p>
+            <strong>Fecha nacimiento:</strong> {{(empleado?.fechaNacimiento | date) || 'Sin registrar'}}
+          </p>
 
-              <p>
-                <strong>Esta vacunado:</strong> {{empleado?.vacunado ?? 'Sin registrar'}}
-              </p>
+          <p>
+            <strong>Esta vacunado:</strong> {{(empleado?.vacunado === false ? 'No vacunado' : 'Vacunado') || 'Sin registrar'}}
+          </p>
 
-              <p>
-                <strong>Telefono movil:</strong> {{empleado?.telefonoMovil ?? 'Sin registrar'}}
-              </p>
-            </section>
-          </section>
-          <!--    DIRECCCION-->
-          <section>
+          <p>
+            <strong>Telefono movil:</strong> {{empleado?.telefonoMovil || 'Sin registrar'}}
+          </p>
+        </section>
+      </section>
+      <!--    DIRECCCION-->
+      <section class="contenido-direcciones-vacunas">
+        <h5>Dirección</h5>
+        <section *ngIf="empleado.direcciones; else sinDirecciones">
+          <app-direcciones [direcciones]="empleado.direcciones"></app-direcciones>
+        </section>
+        <ng-template #sinDirecciones>
+          No se registro direcciones!
+        </ng-template>
+      </section>
 
-            <h5>Dirección</h5>
-              <section *ngIf="empleado.direcciones; else sinDirecciones">
-                <app-direcciones [direcciones]="empleado.direcciones"></app-direcciones>
-              </section>
-            <ng-template #sinDirecciones>
-              No se registro direcciones!
-            </ng-template>
-          </section>
-
-          <!--    VACUNAS-->
-          <section>
-            <h5>Vacunas</h5>
-              <section *ngIf="empleado.vacunas; else sinVacunas">
-                <app-vacunas [vacunas]="empleado.vacunas"></app-vacunas>
-              </section>
-            <ng-template #sinVacunas>
-              No se registro vacunas!
-            </ng-template>
-          </section>
+      <!--    VACUNAS-->
+      <section class="contenido-direcciones-vacunas">
+        <h5>Vacunas</h5>
+        <section *ngIf="empleado.vacunas; else sinVacunas">
+          <app-vacunas [vacunas]="empleado.vacunas"></app-vacunas>
+        </section>
+        <ng-template #sinVacunas>
+          No se registro vacunas!
+        </ng-template>
+      </section>
     </mat-card-content>
+    <div class="row contenedor-btn">
+      <div class="col-sm-4">
+        <div class="d-grid gap-2">
+          <button class="btn btn-success" (click)="editarEmpleado(empleado)" type="button">Editar</button>
+        </div>
+      </div>
+      <div class="col-sm-4" *ngIf="(usuarioLogeado?.rol === 'admin')">
+        <div class="d-grid gap-2">
+          <button class="btn btn-outline-danger"
+                  [disabled]="(empleado.rol === 'admin')"
+                  (click)="eliminarEmpleado(empleado.id)"
+                  type="button">Eliminar</button>
+        </div>
+      </div>
+      <div class="col-sm-4" *ngIf="(usuarioLogeado?.rol === 'admin')">
+        <div class="d-grid gap-2">
+          <button class="btn btn-primary"
+                  [disabled]="(empleado?.login)"
+                  (click)="darDeAlta(empleado)"
+                  type="button">Dar de alta</button>
+        </div>
+      </div>
+    </div>
   </mat-card>
-  <div class="row contenedor-btn">
-    <div class="col-sm-6">
-      <div class="d-grid gap-2">
-        <button class="btn btn-outline-warning" (click)="editarEmpleado(empleado)" type="button">Editar</button>
-      </div>
-    </div>
-    <div class="col-sm-6">
-      <div class="d-grid gap-2">
-        <button class="btn btn-outline-danger" (click)="eliminarEmpleado(empleado.id)" type="button">Eliminar</button>
-      </div>
-    </div>
-    <div class="col-sm-6">
-      <div class="d-grid gap-2">
-        <button class="btn btn-outline-danger" (click)="darDeAlta(empleado.id)" type="button">Dar de alta</button>
-      </div>
-    </div>
-  </div>
-
 </section>

@@ -1,3 +1,10 @@
-<section *ngFor="let direccion of direcciones">
-  <app-direccion [direccion]="direccion"></app-direccion>
-</section>
+<div class="row" *ngIf="direcciones.length > 0; else sinDirecciones">
+  <section class="col-sm-4" *ngFor="let direccion of direcciones">
+    <app-direccion [direccion]="direccion">
+    </app-direccion>
+  </section>
+</div>
+
+<ng-template #sinDirecciones>
+  No se encuentra direcciones registrados.
+</ng-template>

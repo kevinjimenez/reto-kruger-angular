@@ -1,3 +1,5 @@
+export {Vacunas} from './vacunas';
+export {ValidacionFormulario} from './validacion-formulario';
 export {DireccionInterface, CreateDireccionInterface, UpdateDireccionInterface} from './interfaces/direccion.interface';
 export {VacunaInterface, CreateVacunaInterface, UpdateVacunaInterface} from './interfaces/vacuna.interface';
 export {LoginInterface, AuthInterface} from './interfaces/login.interface';
