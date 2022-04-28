@@ -60,8 +60,8 @@ export class EmpleadoDetalleComponent implements OnInit {
       data: empleado,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.empleado = result;
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   this.empleado = result;
+    // });
   }
 }

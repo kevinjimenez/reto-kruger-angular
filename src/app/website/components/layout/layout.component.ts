@@ -4,7 +4,9 @@ import {Component, OnInit} from '@angular/core';
   selector: 'app-layout',
   // templateUrl: './layout.component.html',
   template: `
-    <app-nav></app-nav>
+    <section style="padding: 1rem 1rem 1rem 1rem">
+      <app-nav></app-nav>
+    </section>
     <router-outlet></router-outlet>
   `,
   styleUrls: ['./layout.component.scss'],
