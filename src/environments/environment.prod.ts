@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  url: 'https://kruger-backend.herokuapp.com',
+  port: undefined,
 };

@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  url: 'http://localhost',
-  port: 3000,
+  url: 'https://kruger-backend.herokuapp.com',
+  port: 0,
 };
 
 /*

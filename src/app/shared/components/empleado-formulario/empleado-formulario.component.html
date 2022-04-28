@@ -168,7 +168,7 @@
       </div>
       <!--      Vacunas-->
       <section *ngIf="campoVacunado?.value">
-        <div class="row">
+        <div class="row" *ngIf="campoVacunas.controls.length > 0">
           <div class="col-sm-1"></div>
           <div class="col-sm-10 text-center">
               <span class="text-danger">Ingrese la informacion de su vacunacion</span>
