@@ -5,6 +5,7 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import * as moment from 'moment';
 import {EmpleadoService} from '../../../core';
+import {MatAccordion} from '@angular/material/expansion';
 
 export const MY_FORMATS = {
   parse: {
@@ -46,6 +47,7 @@ export class EmpleadoFormularioComponent implements OnInit {
 
   }
 
+  //
   ngOnInit(): void {
     this.contruirFormulario();
   }
@@ -56,15 +58,17 @@ export class EmpleadoFormularioComponent implements OnInit {
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(60),
+        Validators.pattern(/^[A-Za-z]+$/),
       ]],
       apellidos: [this.empleadoAEditar?.apellidos ?? '', [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(60),
+        Validators.pattern(/^[A-Za-z]+$/),
       ]],
       cedula: [this.empleadoAEditar?.cedula ?? '', [
         Validators.required,
-        Validators.pattern(/^-?(0|[1-9]\d*)?$/),
+        Validators.pattern(/^\d+$/),
         Validators.minLength(10),
         Validators.maxLength(10),
       ], this.empleadoAEditar ? [] : [ValidacionFormulario.existeEmpleadoConCedula(this._empleadoService)]],
@@ -77,7 +81,7 @@ export class EmpleadoFormularioComponent implements OnInit {
       telefonoMovil: [this.empleadoAEditar?.telefonoMovil ?? '', [
         Validators.minLength(7),
         Validators.maxLength(10),
-        Validators.pattern(/^-?(0|[1-9]\d*)?$/),
+        Validators.pattern(/^\d+$/),
       ]],
       vacunado: [this.empleadoAEditar?.vacunado ?? ''],
       // DIRECCIONES
@@ -100,6 +104,15 @@ export class EmpleadoFormularioComponent implements OnInit {
           id: new FormControl(i.id),
         }))) ?? []),
     });
+
+    this.campoVacunado?.valueChanges
+      .subscribe(value => {
+        if (value) {
+          this.agregarVacuna();
+        } else {
+          this.campoVacunas.controls = [];
+        }
+      });
   }
 
   get campoNombres() {
@@ -148,6 +161,10 @@ export class EmpleadoFormularioComponent implements OnInit {
 
   get esCampoFechaNacimientoInvalido() {
     return this.campoFechaNacimiento?.touched && this.campoFechaNacimiento.invalid;
+  }
+
+  get campoVacunado() {
+    return this.empleadoFormulario.get('vacunado');
   }
 
 

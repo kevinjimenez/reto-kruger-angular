@@ -18,6 +18,8 @@ export class LoginComponent {
     private readonly _router: Router,
     public dialog: MatDialog,
   ) {
+    localStorage.removeItem('payload');
+    sessionStorage.removeItem('jwt');
   }
 
   irAHome(): void {

@@ -1,7 +1,7 @@
 <form [formGroup]="empleadoFormulario" (ngSubmit)="guardarEmpleado($event)">
   <mat-card>
     <mat-card-header>
-      <mat-card-title> {{empleadoAEditar ? 'Editar' : 'Crear'}} Empleado</mat-card-title>
+      <mat-card-title> {{empleadoAEditar ? 'Editar empleado' : 'Empleado'}} </mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="row">
@@ -26,6 +26,9 @@
               <mat-error *ngIf="campoNombres?.hasError('maxlength')">
                 Debe tener maximo 60 caracteres
               </mat-error>
+              <mat-error *ngIf="campoNombres?.hasError('pattern')">
+                No debe contener caracteres especiales ni numeros
+              </mat-error>
             </div>
           </section>
         </div>
@@ -49,6 +52,9 @@
               </mat-error>
               <mat-error *ngIf="campoApellidos?.hasError('maxlength')">
                 Debe tener maximo 60 caracteres
+              </mat-error>
+              <mat-error *ngIf="campoApellidos?.hasError('pattern')">
+                No debe contener caracteres especiales ni numeros
               </mat-error>
             </div>
           </section>
@@ -160,6 +166,118 @@
           </mat-slide-toggle>
         </div>
       </div>
+      <!--      Vacunas-->
+      <section *ngIf="campoVacunado?.value">
+        <div class="row">
+          <div class="col-sm-1"></div>
+          <div class="col-sm-10 text-center">
+              <span class="text-danger">Ingrese la informacion de su vacunacion</span>
+          </div>
+          <div class="col-sm-1"></div>
+        </div>
+        <mat-accordion class="example-headers-align"
+                       style="margin: 1rem 1rem 1rem 1rem">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Vacunas
+              </mat-panel-title>
+              <mat-panel-description>
+                Registre su vacunacion
+                <mat-icon>vaccines</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="row" style="padding: 1rem 1rem 1rem 1rem">
+              <div class="col-sm-4"></div>
+              <div class="col-sm-4"></div>
+              <div class="col-sm-4 text-end">
+                <button mat-mini-fab
+                        type="button"
+                        color="primary"
+                        aria-label="Example icon button with a menu icon"
+                        (click)="agregarVacuna()">
+                  <mat-icon>add</mat-icon>
+                </button>
+                Agregar Vacuna
+              </div>
+            </div>
+            <div formArrayName="vacunas"
+                 *ngFor="let item of campoVacunas.controls ; let j = index"
+            >
+              <div class="row" [formGroupName]="j" style="margin: 1rem 1rem 1rem 1rem">
+                <div class="col-sm-12">
+                  <div class="d-grid gap-2">
+                    <button class="btn btn-danger btn-sm"
+                            (click)="eliminarVacuna(j)"
+                            type="button">
+                      Eliminar vacuna
+                    </button>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Tipo vacuna</mat-label>
+                    <mat-select formControlName="tipoVacuna">
+                      <mat-option *ngFor="let vacuna of tipoVacunas" [value]="vacuna.value">
+                        {{vacuna.label}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-hint>Seleccione el tipo de vacuna.</mat-hint>
+                  </mat-form-field>
+                  <section class="margen-input-error">
+                    <div class="messages" *ngIf="esCampoTipoVacunaInvalido(j)">
+                      <mat-error *ngIf="campoTipoVacuna(j)?.hasError('required')">
+                        El campo Tipo de vacuna es requerido
+                      </mat-error>
+                    </div>
+                  </section>
+                </div>
+                <div class="col-sm-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Numero de dosis</mat-label>
+                    <input placeholder="Nombre"
+                           formControlName="numeroDosis"
+                           matInput
+                           autocomplete="off"
+                           type="text">
+                    <mat-hint>Ingrese el numero de dosis.</mat-hint>
+                  </mat-form-field>
+                  <section class="margen-input-error">
+                    <div class="messages" *ngIf="esCampoNumeroDosisInvalido(j)">
+                      <mat-error *ngIf="campoNumeroDosis(j)?.hasError('required')">
+                        El campo Numero de dosis es requerido
+                      </mat-error>
+                    </div>
+                  </section>
+                </div>
+                <div class="col-sm-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Fecha de vacunacion</mat-label>
+                    <input matInput [matDatepicker]="picker1"
+                           formControlName="fechaVacunacion"
+                    >
+                    <mat-hint>Ingrese la fecha de vacunacion YYYY-MM-DD.</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+                  <section class="margen-input-error">
+                    <div class="messages" *ngIf="esCampoFechaVacunacionInvalido(j)">
+                      <mat-error *ngIf="campoFechaVacunacion(j)?.hasError('required')">
+                        El campo Fecha de vacunacion es requerido
+                      </mat-error>
+                      <mat-error *ngIf="campoFechaVacunacion(j)?.hasError('matDatepickerParse')">
+                        La fecha es invalida
+                      </mat-error>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </div>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+      </section>
 
       <!--      Direcciones-->
       <mat-accordion class="example-headers-align" multi style="margin: 1rem 1rem 1rem 1rem">
@@ -278,118 +396,15 @@
 
         </mat-expansion-panel>
       </mat-accordion>
-
-      <!--      Vacunas-->
-      <mat-accordion class="example-headers-align" multi style="margin: 1rem 1rem 1rem 1rem">
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Vacunas
-            </mat-panel-title>
-            <mat-panel-description>
-              Registre su vacunacion
-              <mat-icon>vaccines</mat-icon>
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-
-          <div class="row" style="padding: 1rem 1rem 1rem 1rem">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4 text-end">
-              <button mat-mini-fab
-                      type="button"
-                      color="primary"
-                      aria-label="Example icon button with a menu icon"
-                      (click)="agregarVacuna()">
-                <mat-icon>add</mat-icon>
-              </button>
-              Agregar Vacuna
-            </div>
-          </div>
-          <div formArrayName="vacunas"
-               *ngFor="let item of campoVacunas.controls ; let j = index"
-          >
-            <div class="row" [formGroupName]="j" style="margin: 1rem 1rem 1rem 1rem">
-              <div class="col-sm-12">
-                <div class="d-grid gap-2">
-                  <button class="btn btn-danger btn-sm"
-                          (click)="eliminarVacuna(j)"
-                          type="button">
-                    Eliminar vacuna
-                  </button>
-                </div>
-              </div>
-              <div class="col-sm-4">
-                <mat-form-field appearance="outline">
-                  <mat-label>Tipo vacuna</mat-label>
-                  <mat-select formControlName="tipoVacuna">
-                    <mat-option *ngFor="let vacuna of tipoVacunas" [value]="vacuna.value">
-                      {{vacuna.label}}
-                    </mat-option>
-                  </mat-select>
-                  <mat-hint>Seleccione el tipo de vacuna.</mat-hint>
-                </mat-form-field>
-                <section class="margen-input-error">
-                  <div class="messages" *ngIf="esCampoTipoVacunaInvalido(j)">
-                    <mat-error *ngIf="campoTipoVacuna(j)?.hasError('required')">
-                      El campo Tipo de vacuna es requerido
-                    </mat-error>
-                  </div>
-                </section>
-              </div>
-              <div class="col-sm-4">
-                <mat-form-field appearance="outline">
-                  <mat-label>Numero de dosis</mat-label>
-                  <input placeholder="Nombre"
-                         formControlName="numeroDosis"
-                         matInput
-                         autocomplete="off"
-                         type="text">
-                  <mat-hint>Ingrese el numero de dosis.</mat-hint>
-                </mat-form-field>
-                <section class="margen-input-error">
-                  <div class="messages" *ngIf="esCampoNumeroDosisInvalido(j)">
-                    <mat-error *ngIf="campoNumeroDosis(j)?.hasError('required')">
-                      El campo Numero de dosis es requerido
-                    </mat-error>
-                  </div>
-                </section>
-              </div>
-              <div class="col-sm-4">
-                <mat-form-field appearance="outline">
-                  <mat-label>Fecha de vacunacion</mat-label>
-                  <input matInput [matDatepicker]="picker1"
-                         formControlName="fechaVacunacion"
-                  >
-                  <mat-hint>Ingrese la fecha de vacunacion YYYY-MM-DD.</mat-hint>
-                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                  <mat-datepicker #picker1></mat-datepicker>
-                </mat-form-field>
-                <section class="margen-input-error">
-                  <div class="messages" *ngIf="esCampoFechaVacunacionInvalido(j)">
-                    <mat-error *ngIf="campoFechaVacunacion(j)?.hasError('required')">
-                      El campo Fecha de vacunacion es requerido
-                    </mat-error>
-                    <mat-error *ngIf="campoFechaVacunacion(j)?.hasError('matDatepickerParse')">
-                      La fecha es invalida
-                    </mat-error>
-                  </div>
-                </section>
-              </div>
-            </div>
-          </div>
-
-        </mat-expansion-panel>
-      </mat-accordion>
+      <mat-card-actions>
+        <div class="d-grid gap-2">
+          <button class="btn btn-success" type="submit">
+            {{empleadoAEditar ? 'Editar' : 'Guardar'}}
+          </button>
+          <button class="btn btn-danger" [hidden]="!empleadoAEditar" mat-dialog-close type="button">Cancelar</button>
+        </div>
+      </mat-card-actions>
     </mat-card-content>
-    <mat-card-actions>
-      <div class="d-grid gap-2">
-        <button class="btn btn-success" type="submit">
-          {{empleadoAEditar ? 'Editar' : 'Guardar'}}
-        </button>
-        <button class="btn btn-danger" [hidden]="!empleadoAEditar" mat-dialog-close type="button">Cancelar</button>
-      </div>
-    </mat-card-actions>
   </mat-card>
 </form>
 

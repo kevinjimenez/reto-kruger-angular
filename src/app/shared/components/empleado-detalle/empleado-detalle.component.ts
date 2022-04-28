@@ -42,11 +42,14 @@ export class EmpleadoDetalleComponent implements OnInit {
   }
 
   eliminarEmpleado(id: number) {
-    this._empleadoService.deleteById(id).subscribe(
-      _ => {
-        this._router.navigate(['cms','empleados'])
-      }
-    );
+    const ok = confirm('Desear eliminar?')
+    if(ok){
+      this._empleadoService.deleteById(id).subscribe(
+        _ => {
+          this._router.navigate(['cms', 'empleados']);
+        },
+      );
+    }
   }
 
   darDeAlta(empleado: EmpleadoInterface) {

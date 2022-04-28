@@ -61,7 +61,9 @@
       </section>
     </mat-card-content>
     <div class="row contenedor-btn">
-      <div class="col-sm-4">
+      <div class="col-sm-4" [ngClass]="{
+      'col-sm-12': !(usuarioLogeado?.rol === 'admin')
+      }">
         <div class="d-grid gap-2">
           <button class="btn btn-success" (click)="editarEmpleado(empleado)" type="button">Editar</button>
         </div>
