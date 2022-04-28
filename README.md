@@ -1,27 +1,45 @@
 # Vacunacion
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.3.
+El proyecto tiene el fin de registrar a las personas que se hayan vacunado y podran agregar sus respectivas dosis con sus respectivas vacunas
 
-## Development server
+El aplicativo web cuento con dos roles Administrador y usuario
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+El administrador podra agrear, eliminar y editar a los diferentes empleados, mientras que el usuario solo podra editar su informacion
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+# Ingreso a la app
+Para poder ingresar a la app web se debe ingresar con las credenciales:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```
+usuario: admin
+password: 12345678
+```
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# Frontend
 
-## Running end-to-end tests
+El proyecto se realizo en angular con su version 13.3.3.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Pasos para levantar la app web
+1. Primero se debe clonar el repositorio.
+2. Se debe instalar sus dependencias con el comando:
+``` 
+npm i
+```
+3. Para poder ejecutar el proyecto de forma local se debe ejecuntar el comando:
+``` 
+ng serve -o
+```
+4. La app web se levantara en la url http://localhost:4200/#/
 
-## Further help
+# Backend
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+El backend se desarrollo en el framework NestJS con base de datos Postgres, ademas, para su uso se desplego en heroku
+
+Se desarrollo las diferentes Api rest para poder realizar el reto.
+
+#### Link repositorio backend `https://github.com/kevinjimenez/reto-kruger-backend`
+
+#### API heroku `https://kruger-backend.herokuapp.com/`
+
