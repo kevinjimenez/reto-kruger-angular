@@ -21,6 +21,10 @@ password: 12345678
 
 El proyecto se realizo en angular con su version 13.3.3.
 
+Se uso librerias de estilo tales como: 
+- <strong>ANGULAR MATERIAL<strong>
+- <strong>BOOTSTRAP<strong>
+
 ## Pasos para levantar la app web
 1. Primero se debe clonar el repositorio.
 2. Se debe instalar sus dependencias con el comando:
