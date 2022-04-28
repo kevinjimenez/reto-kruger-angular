@@ -50,7 +50,7 @@
       </section>
 
       <!--    VACUNAS-->
-      <section class="contenido-direcciones-vacunas">
+      <section class="contenido-direcciones-vacunas" *ngIf="empleado.vacunado">
         <h5>Vacunas</h5>
         <section *ngIf="empleado.vacunas; else sinVacunas">
           <app-vacunas [vacunas]="empleado.vacunas"></app-vacunas>

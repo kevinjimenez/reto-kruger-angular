@@ -57,7 +57,6 @@ export class EditarComponent implements OnInit {
             vacunas = values!;
             empleado.direcciones = direcciones;
             empleado.vacunas = vacunas;
-            console.log(empleado);
             this.dialogRef.close(empleado);
           },
           error: console.log,

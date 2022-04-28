@@ -58,13 +58,13 @@ export class EmpleadoFormularioComponent implements OnInit {
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(60),
-        Validators.pattern(/^[A-Za-z]+$/),
+        Validators.pattern(/^[a-zA-Z\s]*$/),
       ]],
       apellidos: [this.empleadoAEditar?.apellidos ?? '', [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(60),
-        Validators.pattern(/^[A-Za-z]+$/),
+        Validators.pattern(/^[a-zA-Z\s]*$/),
       ]],
       cedula: [this.empleadoAEditar?.cedula ?? '', [
         Validators.required,

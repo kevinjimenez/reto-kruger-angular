@@ -5,7 +5,7 @@ import {EmpleadoInterface} from '../../../utils';
 import {MatDialog} from '@angular/material/dialog';
 import {EditarComponent} from '../../modals/editar/editar.component';
 import {
-  CrearUsuarioContraseniaComponent
+  CrearUsuarioContraseniaComponent,
 } from '../../modals/crear-usuario-contrasenia/crear-usuario-contrasenia.component';
 
 @Component({
@@ -23,12 +23,12 @@ export class EmpleadoDetalleComponent implements OnInit {
     private readonly _router: Router,
     private readonly _activatedRoute: ActivatedRoute,
     private readonly _empleadoService: EmpleadoService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
   ) {
   }
 
   ngOnInit(): void {
-    this.usuarioLogeado = JSON.parse(localStorage.getItem('payload')!) as EmpleadoInterface
+    this.usuarioLogeado = JSON.parse(localStorage.getItem('payload')!) as EmpleadoInterface;
 
     this._activatedRoute
       .params
@@ -42,8 +42,8 @@ export class EmpleadoDetalleComponent implements OnInit {
   }
 
   eliminarEmpleado(id: number) {
-    const ok = confirm('Desear eliminar?')
-    if(ok){
+    const ok = confirm('Desear eliminar?');
+    if (ok) {
       this._empleadoService.deleteById(id).subscribe(
         _ => {
           this._router.navigate(['cms', 'empleados']);
@@ -63,8 +63,10 @@ export class EmpleadoDetalleComponent implements OnInit {
       data: empleado,
     });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   this.empleado = result;
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.empleado = result;
+      }
+    });
   }
 }
